@@ -5,12 +5,20 @@ Author : Dhruv B Kakadiya
 
 import pygame as pg
 from modules import statics as st
+from modules.statics import *
+from modules.checker_board import *
 
 # static variables for this perticular file
 fps = 60
 
 WIN = pg.display.set_mode((st.width, st.height))
 pg.display.set_caption("Checkers")
+
+def get_row_col_mouse (pos):
+    x, y = pos
+    row = y // sq_size
+    col = x // sq_size
+    return row, col
 
 # main function
 if __name__ == '__main__':
@@ -21,6 +29,11 @@ if __name__ == '__main__':
     # certain clock value default because it is varries from diff pc to pc
     clock = pg.time.Clock()
 
+    board = checker_board()
+
+    piece = board.get_piece(0, 1)
+    board.move(piece, 4, 3)
+
     # main loop
     while (run):
         clock.tick(fps)
@@ -29,4 +42,13 @@ if __name__ == '__main__':
         for event in pg.event.get():
             if (event.type == pg.QUIT):
                 run = False
+
+            if (event.type == pg.MOUSEBUTTONDOWN):
+                pos = pg.mouse.get_pos()
+                row, col = get_row_col_mouse(pos)
+                piece = board.get_piece(row, col)
+                board.move(piece, 4, 3)
+
+        board.draw(WIN)
+        pg.display.update()
     pg.quit()
