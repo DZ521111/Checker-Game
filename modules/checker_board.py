@@ -76,6 +76,18 @@ class checker_board:
     def remove (self, pieces):
         for piece in pieces:
             self.board[piece.row][piece.col] = 0
+            if (piece != 0):
+                if (piece.color == black):
+                    self.black_l -= 1
+                else:
+                    self.white_l -= 1
+
+    def winner (self):
+        if (self.black_l <= 0):
+            return white
+        elif (self.white_l <= 0):
+            return black
+        return None
 
     # Traversal Left
     def _traverse_l (self, start, stop, step, color, l, skip = []):
@@ -108,6 +120,7 @@ class checker_board:
                 last = [current]
             l -= 1
         return moves
+
 
     def _traverse_r (self, start, stop, step, color, right, skip = []):
         moves = {}

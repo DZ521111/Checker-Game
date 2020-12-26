@@ -37,6 +37,9 @@ if __name__ == '__main__':
     while (run):
         clock.tick(fps)
 
+        if (board.winner() != None):
+            print(board.winner())
+
         # check if any events is running or not
         for event in pg.event.get():
             if (event.type == pg.QUIT):
