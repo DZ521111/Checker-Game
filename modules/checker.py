@@ -13,6 +13,7 @@ class checker:
         self._init()
         self.window = window
 
+    # to update the position
     def update (self):
         self.board.draw(self.window)
         self.draw_moves(self.valid_moves)
@@ -24,6 +25,7 @@ class checker:
         self.turn = black
         self.valid_moves = {}
 
+    # to reset the position
     def reset (self):
         self._init()
 
@@ -40,6 +42,7 @@ class checker:
             return True
         return False
 
+    # to move the pieces
     def _move(self, row, col):
         piece = self.board.get_piece(row, col)
         if ((self.select) and (piece == 0) and (row, col) in self.valid_moves):
@@ -52,11 +55,13 @@ class checker:
             return False
         return True
 
+    # to draw next possible move
     def draw_moves (self, moves):
         for move in moves:
             row, col = move
             pg.draw.circle(self.window, red, (col * sq_size + sq_size // 2, row * sq_size + sq_size // 2), 15)
 
+    # for changing the turn
     def chg_turn (self):
         self.valid_moves = {}
         if (self.turn == black):

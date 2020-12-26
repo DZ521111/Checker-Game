@@ -30,6 +30,7 @@ if __name__ == '__main__':
     # certain clock value default because it is varries from diff pc to pc
     clock = pg.time.Clock()
 
+    # create board
     board = checker_board()
     game = checker(WIN)
 
