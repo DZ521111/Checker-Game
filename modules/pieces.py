@@ -17,10 +17,10 @@ class pieces:
         self.color = color
         self.king = False
 
-        if (self.color == yellow):
+        '''if (self.color == yellow):
             self.direction = -1
         else:
-            self.direction = 1
+            self.direction = 1'''
 
         self.x = self.y = 0
         self.calculate_pos()

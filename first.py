@@ -48,6 +48,8 @@ if __name__ == '__main__':
             if (event.type == pg.MOUSEBUTTONDOWN):
                 pos = pg.mouse.get_pos()
                 row, col = get_row_col_mouse(pos)
+                if (game.turn == black):
+                    game.selectrc(row, col)
                 #piece = board.get_piece(row, col)
                 #board.move(piece, 4, 3)
 

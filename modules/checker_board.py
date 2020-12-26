@@ -55,3 +55,81 @@ class checker_board:
                 piece = self.board[row][col]
                 if (piece != 0):
                     piece.draw(window)
+
+    def get_valid_moves(self, piece):
+        moves = {}
+        l = piece.col - 1
+        r = piece.col + 1
+        row = piece.row
+
+        if (piece.color == black or piece.king):
+            moves.update(self._traverse_l(row - 1, max(row - 3, -1), -1, piece.color, l))
+            moves.update(self._traverse_r(row - 1, max(row - 3, -1), -1, piece.color, r))
+
+        if (piece.color == white or piece.king):
+            moves.update(self._traverse_l(row + 1, min(row + 3, rows), 1, piece.color, l))
+            moves.update(self._traverse_r(row + 1, min(row + 3, rows), 1, piece.color, r))
+
+        return moves
+
+    def _traverse_l (self, start, stop, step, color, l, skip = []):
+        moves = {}
+        last = []
+        for r in range(start, stop, step):
+            if (l < 0):
+                break
+            current = self.board[r][l]
+            if (current == 0):
+                if (skip and not last):
+                    break
+                elif (skip):
+                    moves[(r, l)] = last + skip
+                else:
+                    moves[(r, l)] = last
+
+                if (last):
+                    if (step == -1):
+                        row = max(r - 3, 0)
+                    else:
+                        row = min(r + 3, rows)
+                    moves.update(self._traverse_l(r + step, row, step, color, l - 1, skip = last))
+                    moves.update(self._traverse_r(r + step, row, step, color, l + 1, skip = last))
+                break
+
+            elif (current.color == color):
+                break
+            else:
+                last = [current]
+            l -= 1
+        return moves
+
+    def _traverse_r (self, start, stop, step, color, right, skip = []):
+        moves = {}
+        last = []
+        for r in range(start, stop, step):
+            if (right >= cols):
+                break
+            current = self.board[r][right]
+            if (current == 0):
+                if (skip and not last):
+                    break
+                elif (skip):
+                    moves[(r, right)] = last + skip
+                else:
+                    moves[(r, right)] = last
+
+                if (last):
+                    if (step == -1):
+                        row = max(r - 3, 0)
+                    else:
+                        row = min(r + 3, rows)
+                    moves.update(self._traverse_l(r + step, row, step, color, right - 1, skip = last))
+                    moves.update(self._traverse_r(r + step, row, step, color, right + 1, skip = last))
+                break
+
+            elif (current.color == color):
+                break
+            else:
+                last = [current]
+            right += 1
+        return moves

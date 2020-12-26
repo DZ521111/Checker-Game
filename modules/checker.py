@@ -15,6 +15,7 @@ class checker:
 
     def update (self):
         self.board.draw(self.window)
+        self.draw_moves(self.valid_moves)
         pg.display.update()
 
     def _init(self):
@@ -29,6 +30,32 @@ class checker:
     def selectrc(self, row, col):
         if (self.select):
             result = self._move(row, col)
+            if (not result):
+                self.select = None
+        else:
+            piece = self.board.get_piece(row, col)
+            if ((piece != 0) and (piece.color == self.turn)):
+                self.select = piece
+                self.valid_moves = self.board.get_valid_moves(piece)
+                return True
+        return False
 
     def _move(self, row, col):
-        pass
+        piece = self.board.get_piece(row, col)
+        if ((self.select) and (piece == 0) and (row, col) in self.valid_moves):
+            self.board.move(self.select, row, col)
+            self.chg_turn()
+        else:
+            return False
+        return True
+
+    def draw_moves (self, moves):
+        for move in moves:
+            row, col = move
+            pg.draw.circle(self.window, red, (col * sq_size + sq_size // 2, row * sq_size + sq_size // 2), 15)
+
+    def chg_turn (self):
+        if (self.turn == black):
+            self.turn = white
+        else:
+            self.turn = black
