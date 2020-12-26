@@ -77,6 +77,7 @@ class checker_board:
         for piece in pieces:
             self.board[piece.row][piece.col] = 0
 
+    # Traversal Left
     def _traverse_l (self, start, stop, step, color, l, skip = []):
         moves = {}
         last = []
