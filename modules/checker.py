@@ -32,18 +32,21 @@ class checker:
             result = self._move(row, col)
             if (not result):
                 self.select = None
-        else:
-            piece = self.board.get_piece(row, col)
-            if ((piece != 0) and (piece.color == self.turn)):
-                self.select = piece
-                self.valid_moves = self.board.get_valid_moves(piece)
-                return True
+
+        piece = self.board.get_piece(row, col)
+        if ((piece != 0) and (piece.color == self.turn)):
+            self.select = piece
+            self.valid_moves = self.board.get_valid_moves(piece)
+            return True
         return False
 
     def _move(self, row, col):
         piece = self.board.get_piece(row, col)
         if ((self.select) and (piece == 0) and (row, col) in self.valid_moves):
             self.board.move(self.select, row, col)
+            skip = self.valid_moves[(row, col)]
+            if (skip):
+                self.board.remove(skip)
             self.chg_turn()
         else:
             return False
@@ -55,6 +58,7 @@ class checker:
             pg.draw.circle(self.window, red, (col * sq_size + sq_size // 2, row * sq_size + sq_size // 2), 15)
 
     def chg_turn (self):
+        self.valid_moves = {}
         if (self.turn == black):
             self.turn = white
         else:

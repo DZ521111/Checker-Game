@@ -7,6 +7,7 @@ import pygame as pg
 from .statics import *
 from .pieces import *
 
+# checker board creation
 class checker_board:
     def __init__(self):
         self.board = []
@@ -24,7 +25,7 @@ class checker_board:
     def move (self, piece, row, col):
         self.board[piece.row][piece.col], self.board[row][col] = self.board[row][col], self.board[piece.row][piece.col]
         piece.move(row, col)
-        if (row == rows and row == 0):
+        if (row == rows - 1 or row == 0):
             piece.make_king()
             if (piece.color == white):
                 self.white_k += 1
@@ -71,6 +72,10 @@ class checker_board:
             moves.update(self._traverse_r(row + 1, min(row + 3, rows), 1, piece.color, r))
 
         return moves
+
+    def remove (self, pieces):
+        for piece in pieces:
+            self.board[piece.row][piece.col] = 0
 
     def _traverse_l (self, start, stop, step, color, l, skip = []):
         moves = {}
