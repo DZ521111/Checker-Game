@@ -16,6 +16,7 @@ class checker_board:
         self.black_k = self.white_k = 0
         self.create_board()
 
+    # to design the board
     def draw_cubes(self, window):
         window.fill(green)
         for row in range(rows):
@@ -32,6 +33,7 @@ class checker_board:
             else:
                 self.black_k += 1
 
+    # to get piece whatever they want
     def get_piece (self, row, col):
         return self.board[row][col]
 
@@ -121,7 +123,7 @@ class checker_board:
             l -= 1
         return moves
 
-
+    # Traversal Right
     def _traverse_r (self, start, stop, step, color, right, skip = []):
         moves = {}
         last = []
