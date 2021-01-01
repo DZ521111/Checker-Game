@@ -29,6 +29,7 @@ class checker:
     def reset (self):
         self._init()
 
+    # select row and column
     def selectrc(self, row, col):
         if (self.select):
             result = self._move(row, col)
