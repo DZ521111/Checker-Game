@@ -25,6 +25,7 @@ class pieces:
         self.x = self.y = 0
         self.calculate_pos()
 
+    # calculate the positions
     def calculate_pos (self):
         self.x = ((sq_size * self.col) + (sq_size // 2))
         self.y = ((sq_size * self.row) + (sq_size // 2))
