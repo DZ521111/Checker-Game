@@ -30,6 +30,7 @@ class pieces:
         self.x = ((sq_size * self.col) + (sq_size // 2))
         self.y = ((sq_size * self.row) + (sq_size // 2))
 
+    # for making king
     def make_king (self):
         self.king = True
 
