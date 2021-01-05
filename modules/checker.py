@@ -55,7 +55,7 @@ class checker:
             self.chg_turn()
         else:
             return False
-        
+        return True
 
     # to draw next possible move
     def draw_moves (self, moves):
