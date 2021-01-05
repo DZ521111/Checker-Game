@@ -3,7 +3,7 @@ Author : Dhruv B Kakadiya
 
 '''
 
-#
+# import libraries
 import pygame as pg
 from .checker_board import *
 from .statics import *
