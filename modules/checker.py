@@ -45,17 +45,7 @@ class checker:
         return False
 
     # to move the pieces
-    def _move(self, row, col):
-        piece = self.board.get_piece(row, col)
-        if ((self.select) and (piece == 0) and (row, col) in self.valid_moves):
-            self.board.move(self.select, row, col)
-            skip = self.valid_moves[(row, col)]
-            if (skip):
-                self.board.remove(skip)
-            self.chg_turn()
-        else:
-            return False
-        return True
+    
 
     # to draw next possible move
     def draw_moves (self, moves):
