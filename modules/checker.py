@@ -63,4 +63,10 @@ class checker:
             row, col = move
             pg.draw.circle(self.window, red, (col * sq_size + sq_size // 2, row * sq_size + sq_size // 2), 15)
 
-    
+    # for changing the turn
+    def chg_turn (self):
+        self.valid_moves = {}
+        if (self.turn == black):
+            self.turn = white
+        else:
+            self.turn = black
