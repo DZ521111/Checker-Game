@@ -26,9 +26,7 @@ class checker:
         self.turn = black
         self.valid_moves = {}
 
-    # to reset the position
-    def reset (self):
-        self._init()
+    
 
     # select row and column
     def selectrc(self, row, col):
