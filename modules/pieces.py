@@ -46,7 +46,7 @@ class pieces:
         self.col = col
         self.calculate_pos()
 
-    # represtation as a string
+    # represtation (return) as a string
     def __repr__(self):
         return str(self.color)
 
